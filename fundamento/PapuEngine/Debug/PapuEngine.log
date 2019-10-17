@@ -1,0 +1,4 @@
+﻿  MainGame.cpp
+c:\users\proyecto\downloads\clase12\papuengine\maingame.cpp(106): warning C4244: 'argumento': conversión de 'Sint32' a 'float'; posible pérdida de datos
+  PapuEngine.vcxproj -> C:\Users\Proyecto\Downloads\clase12\Debug\PapuEngine.exe
+  PapuEngine.vcxproj -> C:\Users\Proyecto\Downloads\clase12\Debug\PapuEngine.pdb (Partial PDB)
