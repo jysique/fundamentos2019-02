@@ -1,5 +1,6 @@
 #include "Level.h"
 #include <fstream>
+#include <iostream>
 #include "Error.h"
 #include "ResourceManager.h"
 
@@ -19,6 +20,7 @@ void Level::parseLevel()
 		for (size_t x = 0; x < levelData[y].size(); x++)
 		{
 			char tile = levelData[y][x]; //recorrer el archivo level
+			glm::vec2 pos;
 			glm::vec4 desctRect(x*TILE_WIDTH, y*TILE_WIDTH, TILE_WIDTH, TILE_WIDTH);
 				//posX posY ancho y alto -> por motivos del curso
 			switch (tile)
@@ -37,6 +39,12 @@ void Level::parseLevel()
 				
 				break;
 			case 'Z':
+				levelData[y][x] = '.';
+
+				pos.x = x * TILE_WIDTH;
+				pos.y = y * TILE_WIDTH;
+				zombiesPosition.push_back(pos);
+				std::cout << zombiesPosition.size();
 				break;
 			case '.':
 				break;

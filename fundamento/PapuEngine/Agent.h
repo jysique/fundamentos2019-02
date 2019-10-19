@@ -3,6 +3,8 @@
 #include "SpriteBacth.h"
 #include "GLTexture.h"
 #include <string>
+#include "InputManager.h"
+#include <SDL\SDL.h>
 
 const int AGENT_WIDTH = 60;
 
@@ -18,7 +20,7 @@ public:
 	virtual ~Agent(); // todos los hijos llamaran al destructor
 	glm::vec2 getPosition() const { return position; }
 	virtual void update() = 0; //  todos los hijos
-	void draw(SpriteBacth& spritebatch, std::string name);
+	void draw(SpriteBacth& spritebatch, int type);
 
 };
 

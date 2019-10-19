@@ -1,6 +1,6 @@
 #pragma once
 #include "Human.h"
-#include "InputManager.h"
+
 
 class Player:public Human{
 private:
