@@ -1,4 +1,4 @@
-﻿  MainGame.cpp
-c:\users\proyecto\downloads\clase12\papuengine\maingame.cpp(106): warning C4244: 'argumento': conversión de 'Sint32' a 'float'; posible pérdida de datos
-  PapuEngine.vcxproj -> C:\Users\Proyecto\Downloads\clase12\Debug\PapuEngine.exe
-  PapuEngine.vcxproj -> C:\Users\Proyecto\Downloads\clase12\Debug\PapuEngine.pdb (Partial PDB)
+﻿  SpriteGenerator.cpp
+C:\Users\josey\Documents\Fundamentos\fundamentos\PapuEngine\SpriteGenerator.h(6,27): warning C4244:  'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\josey\Documents\Fundamentos\fundamentos\PapuEngine\SpriteGenerator.h(7,41): warning C4244:  'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+  PapuEngine.vcxproj -> C:\Users\josey\Documents\Fundamentos\fundamentos\Debug\PapuEngine.exe

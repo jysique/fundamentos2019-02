@@ -11,7 +11,7 @@
 #include "Level.h"
 #include "Player.h"
 #include "Human.h"
-
+#include "SpriteGenerator.h"
 
 enum class GameState
 {
@@ -28,6 +28,7 @@ private:
 	Window _window;
 	void init();
 	void procesInput();
+	void handleInput();
 	GLS_Program _program;
 	vector<Sprite*> _sprites;
 	Camera2D _camera;
@@ -38,7 +39,7 @@ private:
 	void initLevel();
 	Player* player;
 	vector<Human*> _humansVector;
-
+	vector<SpriteGenerator*> _spritesVector;
 public:
 	MainGame();
 	~MainGame();

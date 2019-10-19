@@ -3,6 +3,8 @@
 #include "SpriteBacth.h"
 #include "GLTexture.h"
 #include <string>
+#include "InputManager.h"
+#include <SDL\SDL.h>
 
 const int AGENT_WIDTH = 60;
 

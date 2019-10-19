@@ -24,6 +24,12 @@ public:
 	vector<glm::vec2> getZombiesPosition() const {
 		return zombiesPosition;
 	}
+	int getWidth() const {
+		return TILE_WIDTH;
+	}
+	int getHeight() const {
+		return TILE_WIDTH;
+	}
 
 	void draw();
 	SpriteBacth spriteBatch;
