@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 c:\users\josey\documents\fundamentos\fundamentos\papuengine\debug\vc142.pdb
 c:\users\josey\documents\fundamentos\fundamentos\papuengine\debug\vc142.idb
 c:\users\josey\documents\fundamentos\fundamentos\papuengine\debug\window.obj
@@ -21,6 +22,7 @@ c:\users\josey\documents\fundamentos\fundamentos\papuengine\debug\agent.obj
 c:\users\josey\documents\fundamentos\fundamentos\papuengine\debug\zombie.obj
 c:\users\josey\documents\fundamentos\fundamentos\papuengine\debug\spritegenerator.obj
 c:\users\josey\documents\fundamentos\fundamentos\papuengine\debug\maingame.obj
+<<<<<<< Updated upstream
 c:\users\josey\downloads\fundamentosta02\fundamentos\papuengine\debug\vc142.pdb
 c:\users\josey\downloads\fundamentosta02\fundamentos\papuengine\debug\vc142.idb
 c:\users\josey\downloads\fundamentosta02\fundamentos\papuengine\debug\window.obj
@@ -44,11 +46,18 @@ c:\users\josey\downloads\fundamentosta02\fundamentos\papuengine\debug\error.obj
 c:\users\josey\downloads\fundamentosta02\fundamentos\papuengine\debug\camera2d.obj
 c:\users\josey\downloads\fundamentosta02\fundamentos\papuengine\debug\agent.obj
 c:\users\josey\downloads\fundamentosta02\fundamentos\papuengine\debug\zombie.obj
+=======
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\vc142.pdb
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\vc142.idb
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\window.obj
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\texturecache.obj
+<<<<<<< Updated upstream
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\spritegenerator.obj
+=======
+>>>>>>> Stashed changes
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\spritebacth.obj
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\sprite.obj
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\resourcemanager.obj
@@ -65,6 +74,7 @@ c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\h
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\gls_program.obj
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\error.obj
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\camera2d.obj
+<<<<<<< Updated upstream
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\agent.obj
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\zombie.obj
 c:\users\josey\documents\fundamentos\fundamentos\debug\papuengine.exe
@@ -80,6 +90,14 @@ c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\e
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\sritebatch.obj
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\vc140.idb
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\vc140.pdb
+=======
+c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\bullet.obj
+c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\agent.obj
+c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\zombie.obj
+c:\users\josey\documents\github\fundamentos2019-02\fundamento\debug\papuengine.ilk
+c:\users\josey\documents\github\fundamentos2019-02\fundamento\debug\papuengine.exe
+c:\users\josey\documents\github\fundamentos2019-02\fundamento\debug\papuengine.pdb
+>>>>>>> Stashed changes
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\papuengine.tlog\cl.command.1.tlog
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\papuengine.tlog\cl.read.1.tlog
 c:\users\josey\documents\github\fundamentos2019-02\fundamento\papuengine\debug\papuengine.tlog\cl.write.1.tlog
