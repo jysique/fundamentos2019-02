@@ -1,4 +1,1 @@
-﻿  SpriteGenerator.cpp
-C:\Users\josey\Documents\Fundamentos\fundamentos\PapuEngine\SpriteGenerator.h(6,27): warning C4244:  'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\josey\Documents\Fundamentos\fundamentos\PapuEngine\SpriteGenerator.h(7,41): warning C4244:  'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-  PapuEngine.vcxproj -> C:\Users\josey\Documents\Fundamentos\fundamentos\Debug\PapuEngine.exe
+﻿
