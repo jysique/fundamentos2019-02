@@ -2,13 +2,16 @@
 #include "Human.h"
 #include "InputManager.h"
 
-class Player:public Human{
+class Player: public Human
+{
 private:
-	InputManager* inputManager;
+	InputManager* _inputManager;
 public:
 	Player();
 	~Player();
-	void init(float _speed, glm::vec2 _position, InputManager* _inputManager);
-	void update();
+	void init(float speed, glm::vec2 position, InputManager* inputManager);
+	void update(const std::vector<std::string>& levelData,
+		std::vector<Human*>& humans,
+		std::vector<Zombie*>& zombies);
 };
 

@@ -1,39 +1,37 @@
 #include "Player.h"
 #include <SDL\SDL.h>
 
+
+void Player::init(float speed, glm::vec2 position, InputManager* inputManager) {
+	_speed = speed;
+	_position = position;
+	_inputManager = inputManager;
+	color.set(0, 0, 185, 255);
+}
+void Player::update(const std::vector<std::string>& levelData,
+	std::vector<Human*>& humans,
+	std::vector<Zombie*>& zombies) {
+	if (_inputManager->isKeyPressed(SDLK_w)) {
+		_position.y += _speed;
+	}
+	if (_inputManager->isKeyPressed(SDLK_s)) {
+		_position.y -= _speed;
+	}
+	if (_inputManager->isKeyPressed(SDLK_a)) {
+		_position.x -= _speed;
+	}
+	if (_inputManager->isKeyPressed(SDLK_d)) {
+		_position.x += _speed;
+	}
+	collideWithLevel(levelData);
+}
+
+
 Player::Player()
 {
 }
 
 
-
 Player::~Player()
 {
-}
-
-void Player::init(float _speed, glm::vec2 _position, InputManager* _inputManager)
-{
-	inputManager = _inputManager;
-	speed = _speed;
-	position = _position;
-	color.r = 255;
-	color.b = 255;
-	color.g = 255;
-	color.a = 255;
-}
-
-void Player::update()
-{
-	if (inputManager->isKeyPressed(SDLK_w)) {
-		position.y += speed;
-	}
-	if (inputManager->isKeyPressed(SDLK_s)) {
-		position.y -= speed;
-	}
-	if (inputManager->isKeyPressed(SDLK_a)) {
-		position.x -= speed;
-	}
-	if (inputManager->isKeyPressed(SDLK_d)) {
-		position.x += speed;
-	}
 }

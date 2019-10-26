@@ -13,6 +13,7 @@ Camera2D::Camera2D():
 }
 
 glm::vec2 Camera2D::convertScreenToWorl(glm::vec2 screenScoords) {
+	screenScoords.y = _screenHeight - screenScoords.y;
 	screenScoords -= glm::vec2(_screenWidth / 2, _screenHeight / 2);
 	screenScoords /= _scale;
 	screenScoords += _position;
