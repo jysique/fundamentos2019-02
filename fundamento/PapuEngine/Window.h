@@ -20,8 +20,7 @@ public:
 	Window();
 	~Window();
 	void swapBuffer();
-	int getScreenWidth() { _screenWidth; };
-	int getScreenHeight() { _screenHeight; };
+	int getScreenWidth() { return _screenWidth; };
+	int getScreenHeight() { return _screenHeight; };
 	int create(string windowName, int screenWidth, int screenHeight, unsigned int currentFlags);
 };
-

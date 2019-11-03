@@ -13,10 +13,28 @@ Camera2D::Camera2D():
 }
 
 glm::vec2 Camera2D::convertScreenToWorl(glm::vec2 screenScoords) {
+	screenScoords.y = _screenHeight - screenScoords.y;
 	screenScoords -= glm::vec2(_screenWidth / 2, _screenHeight / 2);
 	screenScoords /= _scale;
 	screenScoords += _position;
 	return screenScoords;
+}
+
+bool Camera2D::isBoxInView(const glm::vec2& position, const glm::vec2& dimension) {
+	glm::vec2 scaleScreenDimension = glm::vec2(_screenWidth, _screenHeight) / _scale;
+	const float MIN_DISTANCE_X = dimension.x / 2.0f + scaleScreenDimension.x;
+	const float MIN_DISTANCE_Y = dimension.y / 2.0f + scaleScreenDimension.y;
+
+	glm::vec2 centerPos = _position + dimension / 2.0f;
+	glm::vec2 centerCameraPos = _position + glm::vec2(scaleScreenDimension.x / 2.0f, 
+														scaleScreenDimension.y / 2.0f);
+	glm::vec2 distVec = centerPos - centerCameraPos;
+	float xdepth = MIN_DISTANCE_X - abs(distVec.x);
+	float ydepth = MIN_DISTANCE_Y - abs(distVec.y);
+
+	if (xdepth > 0 || ydepth > 0) {
+		return true;
+	}
 }
 
 void Camera2D::init(int screenWidth, int screenHeight) {
@@ -45,4 +63,12 @@ void Camera2D::update() {
 
 Camera2D::~Camera2D()
 {
+}
+
+void Camera2D::setPuntaje(int Puntaje) {
+	puntaje = Puntaje;
+}
+
+int Camera2D::getPuntaje() {
+	return puntaje;
 }
