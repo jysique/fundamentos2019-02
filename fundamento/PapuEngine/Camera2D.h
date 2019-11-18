@@ -13,12 +13,13 @@ private:
 	glm::mat4 _orthoMatrix;
 	int _screenWidth;
 	int _screenHeight;
+	int puntaje;
 public:
 	Camera2D();
 	~Camera2D();
 	glm::vec2 convertScreenToWorl(glm::vec2 screenScoords);
 	void init(int screenWidth, int screenHeight);
-
+	bool isBoxInView(const glm::vec2& position, const glm::vec2& dimension);
 	void update();
 
 	void setPosition(const glm::vec2& newPosition) {
@@ -41,5 +42,8 @@ public:
 	float getScale() {
 		return _scale;
 	}
+
+	void setPuntaje(int Puntaje);
+	int getPuntaje();
 };
 
