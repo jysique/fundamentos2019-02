@@ -3,7 +3,7 @@
 /*
 decodePNG: The picoPNG function, decodes a PNG file buffer in memory, into a raw pixel buffer.
 out_image: output parameter, this will contain the raw pixels after decoding.
-By default the output is 32-bit RGBA color.
+By default the output is 32-bit RGBA ColorRGBA.
 The std::vector is automatically resized to the correct size.
 image_width: output_parameter, this will contain the width of the image in pixels.
 image_height: output_parameter, this will contain the height of the image in pixels.
@@ -11,12 +11,12 @@ in_png: pointer to the buffer of the PNG file in memory. To get it from a file o
 disk, load it and store it in a memory buffer yourself first.
 in_size: size of the input PNG file in bytes.
 convert_to_rgba32: optional parameter, true by default.
-Set to true to get the output in RGBA 32-bit (8 bit per channel) color format
-no matter what color type the original PNG image had. This gives predictable,
+Set to true to get the output in RGBA 32-bit (8 bit per channel) ColorRGBA format
+no matter what ColorRGBA type the original PNG image had. This gives predictable,
 useable data from any random input PNG.
-Set to false to do no color conversion at all. The result then has the same data
+Set to false to do no ColorRGBA conversion at all. The result then has the same data
 type as the PNG image, which can range from 1 bit to 64 bits per pixel.
-Information about the color type or palette colors are not provided. You need
+Information about the ColorRGBA type or palette ColorRGBAs are not provided. You need
 to know this information yourself to be able to use the data so this only
 works for trusted PNG files. Use LodePNG instead of picoPNG if you need this information.
 return: 0 if success, not 0 if some error occured.
@@ -44,8 +44,8 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
 
 	// picoPNG is a PNG decoder in one C++ function of around 500 lines. Use picoPNG for
 	// programs that need only 1 .cpp file. Since it's a single function, it's very limited,
-	// it can convert a PNG to raw pixel data either converted to 32-bit RGBA color or
-	// with no color conversion at all. For anything more complex, another tiny library
+	// it can convert a PNG to raw pixel data either converted to 32-bit RGBA ColorRGBA or
+	// with no ColorRGBA conversion at all. For anything more complex, another tiny library
 	// is available: LodePNG (lodepng.c(pp)), which is a single source and header file.
 	// Apologies for the compact code style, it's to make this tiny.
 
@@ -248,8 +248,8 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
 	{
 		struct Info
 		{
-			unsigned long width, height, colorType, bitDepth, compressionMethod, filterMethod, interlaceMethod, key_r, key_g, key_b;
-			bool key_defined; //is a transparent color key given?
+			unsigned long width, height, ColorRGBAType, bitDepth, compressionMethod, filterMethod, interlaceMethod, key_r, key_g, key_b;
+			bool key_defined; //is a transparent ColorRGBA key given?
 			std::vector<unsigned char> palette;
 		} info;
 		int error;
@@ -288,17 +288,17 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
 				else if (in[pos + 0] == 't' && in[pos + 1] == 'R' && in[pos + 2] == 'N' && in[pos + 3] == 'S') //palette transparency chunk (tRNS)
 				{
 					pos += 4; //go after the 4 letters
-					if (info.colorType == 3)
+					if (info.ColorRGBAType == 3)
 					{
 						if (4 * chunkLength > info.palette.size()) { error = 39; return; } //error: more alpha values given than there are palette entries
 						for (size_t i = 0; i < chunkLength; i++) info.palette[4 * i + 3] = in[pos++];
 					}
-					else if (info.colorType == 0)
+					else if (info.ColorRGBAType == 0)
 					{
 						if (chunkLength != 2) { error = 40; return; } //error: this chunk must be 2 bytes for greyscale image
 						info.key_defined = 1; info.key_r = info.key_g = info.key_b = 256 * in[pos] + in[pos + 1]; pos += 2;
 					}
-					else if (info.colorType == 2)
+					else if (info.ColorRGBAType == 2)
 					{
 						if (chunkLength != 6) { error = 41; return; } //error: this chunk must be 6 bytes for RGB image
 						info.key_defined = 1;
@@ -306,7 +306,7 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
 						info.key_g = 256 * in[pos] + in[pos + 1]; pos += 2;
 						info.key_b = 256 * in[pos] + in[pos + 1]; pos += 2;
 					}
-					else { error = 42; return; } //error: tRNS chunk not allowed for other color models
+					else { error = 42; return; } //error: tRNS chunk not allowed for other ColorRGBA models
 				}
 				else //it's not an implemented chunk type, so ignore it: skip over the data
 				{
@@ -358,7 +358,7 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
 				for (int i = 0; i < 7; i++)
 					adam7Pass(&out_[0], &scanlinen[0], &scanlineo[0], &scanlines[passstart[i]], info.width, pattern[i], pattern[i + 7], pattern[i + 14], pattern[i + 21], passw[i], passh[i], bpp);
 			}
-			if (convert_to_rgba32 && (info.colorType != 6 || info.bitDepth != 8)) //conversion needed
+			if (convert_to_rgba32 && (info.ColorRGBAType != 6 || info.bitDepth != 8)) //conversion needed
 			{
 				std::vector<unsigned char> data = out;
 				error = convert(out, &data[0], info, info.width, info.height);
@@ -370,11 +370,11 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
 			if (in[0] != 137 || in[1] != 80 || in[2] != 78 || in[3] != 71 || in[4] != 13 || in[5] != 10 || in[6] != 26 || in[7] != 10) { error = 28; return; } //no PNG signature
 			if (in[12] != 'I' || in[13] != 'H' || in[14] != 'D' || in[15] != 'R') { error = 29; return; } //error: it doesn't start with a IHDR chunk!
 			info.width = read32bitInt(&in[16]); info.height = read32bitInt(&in[20]);
-			info.bitDepth = in[24]; info.colorType = in[25];
+			info.bitDepth = in[24]; info.ColorRGBAType = in[25];
 			info.compressionMethod = in[26]; if (in[26] != 0) { error = 32; return; } //error: only compression method 0 is allowed in the specification
 			info.filterMethod = in[27]; if (in[27] != 0) { error = 33; return; } //error: only filter method 0 is allowed in the specification
 			info.interlaceMethod = in[28]; if (in[28] > 1) { error = 34; return; } //error: only interlace methods 0 and 1 exist in the specification
-			error = checkColorValidity(info.colorType, info.bitDepth);
+			error = checkColorRGBAValidity(info.ColorRGBAType, info.bitDepth);
 		}
 		void unFilterScanline(unsigned char* recon, const unsigned char* scanline, const unsigned char* precon, size_t bytewidth, unsigned long filterType, size_t length)
 		{
@@ -443,81 +443,81 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
 		}
 		void setBitOfReversedStream(size_t& bitp, unsigned char* bits, unsigned long bit) { bits[bitp >> 3] |= (bit << (7 - (bitp & 0x7))); bitp++; }
 		unsigned long read32bitInt(const unsigned char* buffer) { return (buffer[0] << 24) | (buffer[1] << 16) | (buffer[2] << 8) | buffer[3]; }
-		int checkColorValidity(unsigned long colorType, unsigned long bd) //return type is a LodePNG error code
+		int checkColorRGBAValidity(unsigned long ColorRGBAType, unsigned long bd) //return type is a LodePNG error code
 		{
-			if ((colorType == 2 || colorType == 4 || colorType == 6)) { if (!(bd == 8 || bd == 16)) return 37; else return 0; }
-			else if (colorType == 0) { if (!(bd == 1 || bd == 2 || bd == 4 || bd == 8 || bd == 16)) return 37; else return 0; }
-			else if (colorType == 3) { if (!(bd == 1 || bd == 2 || bd == 4 || bd == 8)) return 37; else return 0; }
-			else return 31; //unexisting color type
+			if ((ColorRGBAType == 2 || ColorRGBAType == 4 || ColorRGBAType == 6)) { if (!(bd == 8 || bd == 16)) return 37; else return 0; }
+			else if (ColorRGBAType == 0) { if (!(bd == 1 || bd == 2 || bd == 4 || bd == 8 || bd == 16)) return 37; else return 0; }
+			else if (ColorRGBAType == 3) { if (!(bd == 1 || bd == 2 || bd == 4 || bd == 8)) return 37; else return 0; }
+			else return 31; //unexisting ColorRGBA type
 		}
 		unsigned long getBpp(const Info& info)
 		{
-			if (info.colorType == 2) return (3 * info.bitDepth);
-			else if (info.colorType >= 4) return (info.colorType - 2) * info.bitDepth;
+			if (info.ColorRGBAType == 2) return (3 * info.bitDepth);
+			else if (info.ColorRGBAType >= 4) return (info.ColorRGBAType - 2) * info.bitDepth;
 			else return info.bitDepth;
 		}
 		int convert(std::vector<unsigned char>& out, const unsigned char* in, Info& infoIn, unsigned long w, unsigned long h)
-		{ //converts from any color type to 32-bit. return value = LodePNG error code
+		{ //converts from any ColorRGBA type to 32-bit. return value = LodePNG error code
 			size_t numpixels = w * h, bp = 0;
 			out.resize(numpixels * 4);
 			unsigned char* out_ = out.empty() ? 0 : &out[0]; //faster if compiled without optimization
-			if (infoIn.bitDepth == 8 && infoIn.colorType == 0) //greyscale
+			if (infoIn.bitDepth == 8 && infoIn.ColorRGBAType == 0) //greyscale
 				for (size_t i = 0; i < numpixels; i++)
 				{
 					out_[4 * i + 0] = out_[4 * i + 1] = out_[4 * i + 2] = in[i];
 					out_[4 * i + 3] = (infoIn.key_defined && in[i] == infoIn.key_r) ? 0 : 255;
 				}
-			else if (infoIn.bitDepth == 8 && infoIn.colorType == 2) //RGB color
+			else if (infoIn.bitDepth == 8 && infoIn.ColorRGBAType == 2) //RGB ColorRGBA
 				for (size_t i = 0; i < numpixels; i++)
 				{
 					for (size_t c = 0; c < 3; c++) out_[4 * i + c] = in[3 * i + c];
 					out_[4 * i + 3] = (infoIn.key_defined == 1 && in[3 * i + 0] == infoIn.key_r && in[3 * i + 1] == infoIn.key_g && in[3 * i + 2] == infoIn.key_b) ? 0 : 255;
 				}
-			else if (infoIn.bitDepth == 8 && infoIn.colorType == 3) //indexed color (palette)
+			else if (infoIn.bitDepth == 8 && infoIn.ColorRGBAType == 3) //indexed ColorRGBA (palette)
 				for (size_t i = 0; i < numpixels; i++)
 				{
 					if (4U * in[i] >= infoIn.palette.size()) return 46;
-					for (size_t c = 0; c < 4; c++) out_[4 * i + c] = infoIn.palette[4 * in[i] + c]; //get rgb colors from the palette
+					for (size_t c = 0; c < 4; c++) out_[4 * i + c] = infoIn.palette[4 * in[i] + c]; //get rgb ColorRGBAs from the palette
 				}
-			else if (infoIn.bitDepth == 8 && infoIn.colorType == 4) //greyscale with alpha
+			else if (infoIn.bitDepth == 8 && infoIn.ColorRGBAType == 4) //greyscale with alpha
 				for (size_t i = 0; i < numpixels; i++)
 				{
 					out_[4 * i + 0] = out_[4 * i + 1] = out_[4 * i + 2] = in[2 * i + 0];
 					out_[4 * i + 3] = in[2 * i + 1];
 				}
-			else if (infoIn.bitDepth == 8 && infoIn.colorType == 6) for (size_t i = 0; i < numpixels; i++) for (size_t c = 0; c < 4; c++) out_[4 * i + c] = in[4 * i + c]; //RGB with alpha
-			else if (infoIn.bitDepth == 16 && infoIn.colorType == 0) //greyscale
+			else if (infoIn.bitDepth == 8 && infoIn.ColorRGBAType == 6) for (size_t i = 0; i < numpixels; i++) for (size_t c = 0; c < 4; c++) out_[4 * i + c] = in[4 * i + c]; //RGB with alpha
+			else if (infoIn.bitDepth == 16 && infoIn.ColorRGBAType == 0) //greyscale
 				for (size_t i = 0; i < numpixels; i++)
 				{
 					out_[4 * i + 0] = out_[4 * i + 1] = out_[4 * i + 2] = in[2 * i];
 					out_[4 * i + 3] = (infoIn.key_defined && 256U * in[i] + in[i + 1] == infoIn.key_r) ? 0 : 255;
 				}
-			else if (infoIn.bitDepth == 16 && infoIn.colorType == 2) //RGB color
+			else if (infoIn.bitDepth == 16 && infoIn.ColorRGBAType == 2) //RGB ColorRGBA
 				for (size_t i = 0; i < numpixels; i++)
 				{
 					for (size_t c = 0; c < 3; c++) out_[4 * i + c] = in[6 * i + 2 * c];
 					out_[4 * i + 3] = (infoIn.key_defined && 256U * in[6 * i + 0] + in[6 * i + 1] == infoIn.key_r && 256U * in[6 * i + 2] + in[6 * i + 3] == infoIn.key_g && 256U * in[6 * i + 4] + in[6 * i + 5] == infoIn.key_b) ? 0 : 255;
 				}
-			else if (infoIn.bitDepth == 16 && infoIn.colorType == 4) //greyscale with alpha
+			else if (infoIn.bitDepth == 16 && infoIn.ColorRGBAType == 4) //greyscale with alpha
 				for (size_t i = 0; i < numpixels; i++)
 				{
 					out_[4 * i + 0] = out_[4 * i + 1] = out_[4 * i + 2] = in[4 * i]; //most significant byte
 					out_[4 * i + 3] = in[4 * i + 2];
 				}
-			else if (infoIn.bitDepth == 16 && infoIn.colorType == 6) for (size_t i = 0; i < numpixels; i++) for (size_t c = 0; c < 4; c++) out_[4 * i + c] = in[8 * i + 2 * c]; //RGB with alpha
-			else if (infoIn.bitDepth < 8 && infoIn.colorType == 0) //greyscale
+			else if (infoIn.bitDepth == 16 && infoIn.ColorRGBAType == 6) for (size_t i = 0; i < numpixels; i++) for (size_t c = 0; c < 4; c++) out_[4 * i + c] = in[8 * i + 2 * c]; //RGB with alpha
+			else if (infoIn.bitDepth < 8 && infoIn.ColorRGBAType == 0) //greyscale
 				for (size_t i = 0; i < numpixels; i++)
 				{
 					unsigned long value = (readBitsFromReversedStream(bp, in, infoIn.bitDepth) * 255) / ((1 << infoIn.bitDepth) - 1); //scale value from 0 to 255
 					out_[4 * i + 0] = out_[4 * i + 1] = out_[4 * i + 2] = (unsigned char)(value);
 					out_[4 * i + 3] = (infoIn.key_defined && value && ((1U << infoIn.bitDepth) - 1U) == infoIn.key_r && ((1U << infoIn.bitDepth) - 1U)) ? 0 : 255;
 				}
-			else if (infoIn.bitDepth < 8 && infoIn.colorType == 3) //palette
+			else if (infoIn.bitDepth < 8 && infoIn.ColorRGBAType == 3) //palette
 				for (size_t i = 0; i < numpixels; i++)
 				{
 					unsigned long value = readBitsFromReversedStream(bp, in, infoIn.bitDepth);
 					if (4 * value >= infoIn.palette.size()) return 47;
-					for (size_t c = 0; c < 4; c++) out_[4 * i + c] = infoIn.palette[4 * value + c]; //get rgb colors from the palette
+					for (size_t c = 0; c < 4; c++) out_[4 * i + c] = infoIn.palette[4 * value + c]; //get rgb ColorRGBAs from the palette
 				}
 			return 0;
 		}
