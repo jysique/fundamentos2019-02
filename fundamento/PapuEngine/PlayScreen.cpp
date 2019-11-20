@@ -21,6 +21,9 @@ void PlayScreen::initGUI() {
 	audioPlayer->addToTrack("Audio/dust.ogg");
 	audioPlayer->addToTrack("Audio/effect.ogg");
 	audioPlayer->playBackgroundSong();
+	backGround = new Background("Textures/trashhunt-game.png");
+	ship = new Ship(6, "Textures/trashhunt-user.png", &_inputManager);
+	spriteFontPuntaje = new SpriteFont("Fonts/GreatLakesNF.ttf", 64);
 }
 
 void PlayScreen::initSystem() {
@@ -37,7 +40,6 @@ void PlayScreen::destroy() {
 	delete backGround;
 	delete ship;
 	delete spriteFontPuntaje;
-	delete spriteFont;
 }
 
 void PlayScreen::onExit() {}
@@ -53,11 +55,7 @@ void PlayScreen::onEntry() {
 	initGUI();
 
 	isClicked = false;
-	backGround = new Background("Textures/trashhunt-game.png");
-	ship = new Ship(6, "Textures/trashhunt-user.png", &_inputManager);
 	_spriteBatch.init();
-
-
 }
 
 
@@ -88,11 +86,11 @@ void PlayScreen::update() {
 			timetoCreateB -= 30;
 		}
 
-		cout << "level  " << level << endl;
+		//cout << "level  " << level << endl;
 		//speedEnemie *= SPEED_TO_CHANGE_ENEMIE;
-		cout << "speed " << speedEnemieA << endl;
-		cout << "timetoCreate " << timetoCreateA << endl;
-		cout << "speed sprite " << timeChangeSpriteA << endl;
+		//cout << "speed " << speedEnemieA << endl;
+		//cout << "timetoCreate " << timetoCreateA << endl;
+		//cout << "speed sprite " << timeChangeSpriteA << endl;
 	}
 
 	//Add Enemy A
@@ -101,7 +99,7 @@ void PlayScreen::update() {
 		timeA++;
 	}
 	else{
-		cout << "Hola" << endl;
+		//cout << "Hola" << endl;
 		Enemie* newEnemie = new Enemie(speedEnemieA, "A",150,150,20,0);
 		//newEnemie->setPosition(800, 100);
 		enemiesAVector.push_back(newEnemie);
@@ -127,8 +125,8 @@ void PlayScreen::update() {
 		if (enemiesAVector[i]->getPosition().x == -10 && enemiesAVector[i]->getClean() == false)
 		{
 			trahNoClean++;
-			std::cout << "Llego no limpio el basurero tipo A: " << i << endl;
-			std::cout << "Puntaje: " << trahNoClean << endl;
+			//std::cout << "Llego no limpio el basurero tipo A: " << i << endl;
+			//std::cout << "Puntaje: " << trahNoClean << endl;
 
 		}
 	}
@@ -139,8 +137,8 @@ void PlayScreen::update() {
 		if (enemiesBVector[i]->getPosition().x == -10 && enemiesBVector[i]->getClean() == false)
 		{
 			trahNoClean++;
-			std::cout << "Llego no limpio el basurero tipo B: " << i << endl;
-			std::cout << "Puntaje: " << trahNoClean << endl;
+			//std::cout << "Llego no limpio el basurero tipo B: " << i << endl;
+			//std::cout << "Puntaje: " << trahNoClean << endl;
 
 		}
 	}
@@ -247,6 +245,17 @@ void PlayScreen::draw() {
 
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
+
+	char buffer[256];
+	_spriteBatch.begin();
+	sprintf(buffer, "TRASH: %d", trahNoClean);
+	spriteFontPuntaje->draw(_spriteBatch, buffer,
+		glm::vec2(350, 40), glm::vec2(0.5), 0.0f,
+		ColorRGBA(255, 255, 255, 255), Justification::MIDDLE);
+
+	_spriteBatch.end();
+	_spriteBatch.renderBatch();
+
 	glBindTexture(GL_TEXTURE_2D, 0);
 	_program.unuse();
 

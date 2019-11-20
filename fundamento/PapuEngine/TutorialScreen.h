@@ -21,13 +21,7 @@ class TutorialScreen : public IGameScreen
 	GLS_Program _program;
 	SpriteBacth _spriteBatch;
 	SpriteFont* spriteFont1;
-	SpriteFont* spriteFont2;
-	SpriteFont* spriteFont3;
-	SpriteFont* spriteFont4;
 	SpriteFont* spriteFontIntegrante;
-	SpriteFont* spriteFontIntegrante1;
-	SpriteFont* spriteFontIntegrante2;
-	SpriteFont* spriteFontIntegrante3;
 	Buttom* buttom;
 	AudioPlayer* audioPlayer = nullptr;
 

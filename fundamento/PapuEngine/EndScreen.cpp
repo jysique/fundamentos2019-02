@@ -26,8 +26,6 @@ void EndScreen::destroy() {
 	delete background;
 	delete spriteFont1;
 	delete spriteFont2;
-	delete spriteFont3;
-	delete spriteFont4;
 	delete audioPlayer;
 }
 
@@ -47,8 +45,7 @@ void EndScreen::onEntry() {
 	background = new Background("Textures/menu.png");
 	background1 = new Background("Textures/earth_chan.png");
 	spriteFont1 = new SpriteFont("Fonts/GreatLakesNF.ttf", 150);
-	spriteFont2 = new SpriteFont("Fonts/GreatLakesNF.ttf", 150);
-	spriteFont3 = new SpriteFont("Fonts/GreatLakesNF.ttf", 60);
+	spriteFont2 = new SpriteFont("Fonts/GreatLakesNF.ttf", 60);
 	buttom = new Buttom("Textures/menu_button.png", 400, 300);
 
 	audioPlayer = new AudioPlayer();
@@ -98,22 +95,21 @@ void EndScreen::draw() {
 
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
-	char buffer1[256];
-	char buffer2[256];
-	char buffer3[256];
+
+	char buffer[256];
 	_spriteBatch.begin();
-	sprintf(buffer1, "GAME OVER ");
-	sprintf(buffer2, "  :'(( ");
-	sprintf(buffer3, "PLAY AGAIN");
-	spriteFont1->draw(_spriteBatch, buffer1,
-		glm::vec2(150, 120), glm::vec2(0.5), 0.0f,
+	sprintf(buffer, "GAME OVER ");
+	spriteFont1->draw(_spriteBatch, buffer,
+		glm::vec2(100, 120), glm::vec2(0.5), 0.0f,
 		ColorRGBA(0, 0, 0, 255)
 	);
-	spriteFont2->draw(_spriteBatch, buffer2,
-		glm::vec2(150, 30), glm::vec2(0.5), 0.0f,
+	sprintf(buffer, "  :'(( ");
+	spriteFont1->draw(_spriteBatch, buffer,
+		glm::vec2(100, 30), glm::vec2(0.5), 0.0f,
 		ColorRGBA(0, 0, 0, 255)
 	);
-	spriteFont3->draw(_spriteBatch, buffer3,
+	sprintf(buffer, "PLAY AGAIN");
+	spriteFont2->draw(_spriteBatch, buffer,
 		glm::vec2(420, 310), glm::vec2(0.5), 0.0f,
 		ColorRGBA(0, 0, 0, 255)
 	);

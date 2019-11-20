@@ -39,7 +39,7 @@ private:
 	SpriteBacth _hudBach;
 	Camera2D _hudCamera;
 	SpriteFont* spriteFontPuntaje;
-	SpriteFont* spriteFont;
+
 	InputManager _inputManager;
 	AudioPlayer* audioPlayer = nullptr;
 

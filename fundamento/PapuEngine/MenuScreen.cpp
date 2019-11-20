@@ -48,9 +48,7 @@ void MenuScreen::onEntry() {
 	_spriteBatch.init();
 	background = new Background("Textures/menu.png");
 	spriteFont1 = new SpriteFont("Fonts/GreatLakesNF.ttf", 150);
-	spriteFont2 = new SpriteFont("Fonts/GreatLakesNF.ttf", 150);
-	spriteFont3 = new SpriteFont("Fonts/GreatLakesNF.ttf", 80);
-	spriteFont4 = new SpriteFont("Fonts/GreatLakesNF.ttf", 80);
+	spriteFont2 = new SpriteFont("Fonts/GreatLakesNF.ttf", 80);
 	buttom = new Buttom("Textures/menu_button.png", 500, 300);
 	buttomTutorial = new Buttom("Textures/menu_button.png", 500, 100);
 
@@ -104,28 +102,26 @@ void MenuScreen::draw() {
 
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
-	char buffer1[256];
-	char buffer2[256];
-	char buffer3[256];
-	char buffer4[256];
+
+	char buffer[256];
 	_spriteBatch.begin();
-	sprintf(buffer1, "TRASH HUNT: ");
-	sprintf(buffer2, "THE REVENGE ");
-	sprintf(buffer3, "PLAY ");
-	sprintf(buffer4, "TUTORIAL ");
-	spriteFont1->draw(_spriteBatch, buffer1,
+	sprintf(buffer, "TRASH HUNT: ");
+	spriteFont1->draw(_spriteBatch, buffer,
 		glm::vec2(30, 120), glm::vec2(0.5), 0.0f,
 		ColorRGBA(0, 0, 0, 255)
 	);
-	spriteFont2->draw(_spriteBatch, buffer2,
+	sprintf(buffer, "THE REVENGE ");
+	spriteFont1->draw(_spriteBatch, buffer,
 		glm::vec2(30, 30), glm::vec2(0.5), 0.0f,
 		ColorRGBA(0, 0, 0, 255)
 	);
-	spriteFont3->draw(_spriteBatch, buffer3,
+	sprintf(buffer, "PLAY ");
+	spriteFont2->draw(_spriteBatch, buffer,
 		glm::vec2(550, 300), glm::vec2(0.5), 0.0f,
 		ColorRGBA(0, 0, 0, 255)
 	);
-	spriteFont4->draw(_spriteBatch, buffer4,
+	sprintf(buffer, "TUTORIAL ");
+	spriteFont2->draw(_spriteBatch, buffer,
 		glm::vec2(520, 100), glm::vec2(0.5), 0.0f,
 		ColorRGBA(0, 0, 0, 255)
 	);

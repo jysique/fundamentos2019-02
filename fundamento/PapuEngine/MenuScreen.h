@@ -22,8 +22,6 @@ private:
 	SpriteBacth _spriteBatch;
 	SpriteFont* spriteFont1;
 	SpriteFont* spriteFont2;
-	SpriteFont* spriteFont3;
-	SpriteFont* spriteFont4;
 	Buttom* buttom;
 	Buttom* buttomTutorial;
 	AudioPlayer* audioPlayer = nullptr;

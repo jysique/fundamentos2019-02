@@ -30,11 +30,7 @@ void TutorialScreen::destroy() {
 	delete buttom;
 	delete background;
 	delete spriteFont1;
-	delete spriteFont2;
 	delete spriteFontIntegrante;
-	delete spriteFontIntegrante1;
-	delete spriteFontIntegrante2;
-	delete spriteFontIntegrante3;
 	delete audioPlayer;
 }
 
@@ -54,13 +50,7 @@ void TutorialScreen::onEntry() {
 	enemie = new Enemie(3, "A", 150, 150, 20, 0);
 	background = new Background("Textures/trashhunt-game.png");
 	spriteFont1 = new SpriteFont("Fonts/GreatLakesNF.ttf", 80);
-	spriteFont2 = new SpriteFont("Fonts/GreatLakesNF.ttf", 80);
-	spriteFont3 = new SpriteFont("Fonts/GreatLakesNF.ttf", 80);
-	spriteFont4 = new SpriteFont("Fonts/GreatLakesNF.ttf", 80);
 	spriteFontIntegrante = new SpriteFont("Fonts/GreatLakesNF.ttf", 30);
-	spriteFontIntegrante1 = new SpriteFont("Fonts/GreatLakesNF.ttf", 30);
-	spriteFontIntegrante2 = new SpriteFont("Fonts/GreatLakesNF.ttf", 30);
-	spriteFontIntegrante3 = new SpriteFont("Fonts/GreatLakesNF.ttf", 30);
 	buttom = new Buttom("Textures/menu_button.png", 570, 40);
 
 
@@ -131,31 +121,33 @@ void TutorialScreen::draw() {
 
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
-	char buffer1[256];
-	char buffer2[256];
-	char buffer3[256];
-	char buffer4[256];
-	char buffer5[256];
-	char buffer6[256];
-	char buffer7[256];
-	char buffer8[256];
+
 	_spriteBatch.begin();
-	sprintf(buffer1, "INSTRUCCIONES ");
-	sprintf(buffer2, "SALTAR ");
-	sprintf(buffer3, "INTEGRANTES: ");
-	sprintf(buffer4, "Jose Ysique ");
-	sprintf(buffer5, "Braulio Baldeon ");
-	sprintf(buffer6, "Renzo Ravelli ");
-	sprintf(buffer7, "Haz click en el tacho");
-	sprintf(buffer8, "para Reciclar la basura ");
-	spriteFont1->draw(_spriteBatch, buffer1,glm::vec2(80, 400), glm::vec2(0.5), 0.0f,ColorRGBA(0, 0, 0, 255));
-	spriteFont2->draw(_spriteBatch, buffer2,glm::vec2(600, 40), glm::vec2(0.5), 0.0f,ColorRGBA(255, 255, 255, 255));
-	spriteFont3->draw(_spriteBatch, buffer7, glm::vec2(80, 350), glm::vec2(0.5), 0.0f, ColorRGBA(0, 0, 0, 255));
-	spriteFont4->draw(_spriteBatch, buffer8, glm::vec2(80, 300), glm::vec2(0.5), 0.0f, ColorRGBA(0, 0, 0, 255));
-	spriteFontIntegrante->draw(_spriteBatch, buffer3,glm::vec2(570, 400), glm::vec2(0.5), 0.0f,ColorRGBA(0, 0, 0, 255));
-	spriteFontIntegrante1->draw(_spriteBatch, buffer4,glm::vec2(570, 380), glm::vec2(0.5), 0.0f,ColorRGBA(0, 0, 0, 255));
-	spriteFontIntegrante2->draw(_spriteBatch, buffer5,glm::vec2(570, 360), glm::vec2(0.5), 0.0f,ColorRGBA(0, 0, 0, 255));
-	spriteFontIntegrante3->draw(_spriteBatch, buffer6,glm::vec2(570, 340), glm::vec2(0.5), 0.0f, ColorRGBA(0, 0, 0, 255));
+
+	char buffer[256];
+	sprintf(buffer, "INSTRUCCIONES ");
+	spriteFont1->draw(_spriteBatch, buffer, glm::vec2(80, 400), glm::vec2(0.5), 0.0f, ColorRGBA(0, 0, 0, 255));
+
+	sprintf(buffer, "SALTAR ");
+	spriteFont1->draw(_spriteBatch, buffer, glm::vec2(600, 40), glm::vec2(0.5), 0.0f, ColorRGBA(255, 255, 255, 255));
+
+	sprintf(buffer, "Haz click en el tacho");
+	spriteFont1->draw(_spriteBatch, buffer, glm::vec2(80, 350), glm::vec2(0.5), 0.0f, ColorRGBA(0, 0, 0, 255));
+
+	sprintf(buffer, "para Reciclar la basura ");
+	spriteFont1->draw(_spriteBatch, buffer, glm::vec2(80, 300), glm::vec2(0.5), 0.0f, ColorRGBA(0, 0, 0, 255));
+	
+	sprintf(buffer, "INTEGRANTES: ");
+	spriteFontIntegrante->draw(_spriteBatch, buffer, glm::vec2(570, 400), glm::vec2(0.5), 0.0f, ColorRGBA(0, 0, 0, 255));
+
+	sprintf(buffer, "Renzo Ravelli ");
+	spriteFontIntegrante->draw(_spriteBatch, buffer, glm::vec2(570, 380), glm::vec2(0.5), 0.0f, ColorRGBA(0, 0, 0, 255));
+	
+	sprintf(buffer, "Braulio Baldeon ");
+	spriteFontIntegrante->draw(_spriteBatch, buffer, glm::vec2(570, 360), glm::vec2(0.5), 0.0f, ColorRGBA(0, 0, 0, 255));
+	
+	sprintf(buffer, "Jose Ysique ");
+	spriteFontIntegrante->draw(_spriteBatch, buffer,glm::vec2(570, 340), glm::vec2(0.5), 0.0f, ColorRGBA(0, 0, 0, 255));
 	
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
