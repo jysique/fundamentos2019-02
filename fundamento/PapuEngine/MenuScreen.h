@@ -23,7 +23,9 @@ private:
 	SpriteFont* spriteFont1;
 	SpriteFont* spriteFont2;
 	SpriteFont* spriteFont3;
+	SpriteFont* spriteFont4;
 	Buttom* buttom;
+	Buttom* buttomTutorial;
 	AudioPlayer* audioPlayer = nullptr;
 
 	bool isClicked;
@@ -39,6 +41,7 @@ public:
 	virtual void initSystem()override;
 	virtual int getNextScreen() const override;
 	virtual int getPreviousScreen() const override;
+	virtual int getTutorialScreen() const override;
 	virtual void checkInput() override;
 	~MenuScreen();
 };

@@ -10,6 +10,7 @@ public:
 	~ScreenList();
 	IGameScreen* moveNext();
 	IGameScreen* movePrevious();
+	IGameScreen* moveTutorial();
 	void setScreen(int nextScreen);
 	void addScreen(IGameScreen* newScreen);
 	void destroy();

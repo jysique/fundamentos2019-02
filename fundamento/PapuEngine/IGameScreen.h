@@ -4,7 +4,8 @@ enum class ScreenState {
 	RUNNING,
 	EXIT_APPLICATION,
 	CHANGE_NEXT,
-	CHANGE_PREVIOUS
+	CHANGE_PREVIOUS,
+	CHANGE_TUTORIAL
 };
 class Game;
 class IGameScreen
@@ -26,6 +27,8 @@ public:
 	virtual void initGUI() = 0;
 	virtual int getNextScreen() const = 0;
 	virtual int getPreviousScreen() const = 0;
+	virtual int getTutorialScreen() const = 0;
+
 	ScreenState getState() const {
 		return _currentState;
 	}

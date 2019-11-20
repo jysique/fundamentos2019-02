@@ -26,6 +26,7 @@ void MenuScreen::initSystem() {
 
 void MenuScreen::destroy() {
 	delete buttom;
+	delete buttomTutorial;
 	delete background;
 	delete spriteFont1;
 	delete spriteFont2;
@@ -49,8 +50,9 @@ void MenuScreen::onEntry() {
 	spriteFont1 = new SpriteFont("Fonts/GreatLakesNF.ttf", 150);
 	spriteFont2 = new SpriteFont("Fonts/GreatLakesNF.ttf", 150);
 	spriteFont3 = new SpriteFont("Fonts/GreatLakesNF.ttf", 80);
-	buttom = new Buttom("Textures/menu_button.png", 400, 300);
-
+	spriteFont4 = new SpriteFont("Fonts/GreatLakesNF.ttf", 80);
+	buttom = new Buttom("Textures/menu_button.png", 500, 300);
+	buttomTutorial = new Buttom("Textures/menu_button.png", 500, 100);
 
 }
 
@@ -68,11 +70,18 @@ void MenuScreen::checkInput() {
 	{
 		if (!isClicked && buttom->cliked(_game->_inputManager.getMouseCoords())) {
 			isClicked = true;
-			std::cout << "Cambio de pantalla" << endl;
-			
+			std::cout << "Cambio al juego" << endl;
 			_currentState = ScreenState::CHANGE_NEXT;
 			//destroy();
 		}
+		if (!isClicked && buttomTutorial->cliked(_game->_inputManager.getMouseCoords())) {
+			isClicked = true;
+			std::cout << "Cambio al tutorial" << endl;
+			_currentState = ScreenState::CHANGE_TUTORIAL;
+			//destroy();
+		}
+
+		isClicked = false;
 	}
 }
 
@@ -90,6 +99,7 @@ void MenuScreen::draw() {
 	_spriteBatch.begin();
 
 	buttom->draw(_spriteBatch);
+	buttomTutorial->draw(_spriteBatch);
 	background->draw(_spriteBatch, 800, 600, 0.0f, 0.0f);
 
 	_spriteBatch.end();
@@ -97,20 +107,26 @@ void MenuScreen::draw() {
 	char buffer1[256];
 	char buffer2[256];
 	char buffer3[256];
+	char buffer4[256];
 	_spriteBatch.begin();
 	sprintf(buffer1, "TRASH HUNT: ");
 	sprintf(buffer2, "THE REVENGE ");
 	sprintf(buffer3, "PLAY ");
+	sprintf(buffer4, "TUTORIAL ");
 	spriteFont1->draw(_spriteBatch, buffer1,
-		glm::vec2(150, 120), glm::vec2(0.5), 0.0f,
+		glm::vec2(30, 120), glm::vec2(0.5), 0.0f,
 		ColorRGBA(0, 0, 0, 255)
 	);
 	spriteFont2->draw(_spriteBatch, buffer2,
-		glm::vec2(150, 30), glm::vec2(0.5), 0.0f,
+		glm::vec2(30, 30), glm::vec2(0.5), 0.0f,
 		ColorRGBA(0, 0, 0, 255)
 	);
 	spriteFont3->draw(_spriteBatch, buffer3,
-		glm::vec2(450, 300), glm::vec2(0.5), 0.0f,
+		glm::vec2(550, 300), glm::vec2(0.5), 0.0f,
+		ColorRGBA(0, 0, 0, 255)
+	);
+	spriteFont4->draw(_spriteBatch, buffer4,
+		glm::vec2(520, 100), glm::vec2(0.5), 0.0f,
 		ColorRGBA(0, 0, 0, 255)
 	);
 
@@ -128,6 +144,10 @@ int MenuScreen::getPreviousScreen() const {
 
 int MenuScreen::getNextScreen() const {
 	return SCREEN_INDEX_GAME;
+}
+
+int MenuScreen::getTutorialScreen() const {
+	return SCREEN_INDEX_TUTORIAL;
 }
 
 MenuScreen::~MenuScreen()

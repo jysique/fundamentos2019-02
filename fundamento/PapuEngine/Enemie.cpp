@@ -14,6 +14,7 @@ Enemie::Enemie(float _speed, std::string _tipo,int _altoImagen, int _anchoImagen
 	anchoImagen = _anchoImagen;
 	desfaseAlto = _desfaseAlto;
 	desfaseAncho = _desfaseAncho;
+
 	//textureID = ResourceManager::getTexture("Textures/trashhuntB_1.png").id;
 }
 
@@ -31,15 +32,15 @@ glm::vec2 Enemie::getPosition() {
 	return position;
 }
 
+
+
 void Enemie::setColor(ColorRGBA color)
 {
 }
 
 bool Enemie::cliked(glm::vec2 _position)
 {
-	//int desfase = 20;
-	//int altura = ;
-	//std::cout << (600 - position.y - altoImagen) << " " << _position.y << std::endl;
+
 	return (_position.y > position.y + altoImagen + desfaseAlto && _position.y < 600 - position.y 
 		&& _position.x > position.x+desfaseAncho && _position.x < position.x + anchoImagen - desfaseAncho 
 		&& position.x > 0);

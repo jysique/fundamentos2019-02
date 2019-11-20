@@ -46,6 +46,16 @@ IGameScreen* ScreenList::moveNext() {
 	return getCurrent();
 }
 
+IGameScreen* ScreenList::moveTutorial() {
+	IGameScreen* currentScreen = getCurrent();
+	if (currentScreen->getTutorialScreen() != -1) {
+		_currentIndex =
+			currentScreen->getTutorialScreen();
+	}
+	return getCurrent();
+}
+
+
 IGameScreen* ScreenList::movePrevious() {
 	IGameScreen* currentScreen = getCurrent();
 	if (currentScreen->getPreviousScreen() != -1) {

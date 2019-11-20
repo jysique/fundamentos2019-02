@@ -36,7 +36,6 @@ void PlayScreen::destroy() {
 	delete audioPlayer;
 	delete backGround;
 	delete ship;
-	delete enemie;
 	delete spriteFontPuntaje;
 	delete spriteFont;
 }
@@ -56,7 +55,6 @@ void PlayScreen::onEntry() {
 	isClicked = false;
 	backGround = new Background("Textures/trashhunt-game.png");
 	ship = new Ship(6, "Textures/trashhunt-user.png", &_inputManager);
-	enemie = new Enemie(speedEnemieA, "A", 150, 150,20,0);
 	_spriteBatch.init();
 
 
@@ -69,8 +67,6 @@ void PlayScreen::update() {
 	_camera2D.update();
 	ship->update();
 
-	//Update Tutorial
-	//enemie->update(timeCurrent, timeChangeSpriteA);
 	timeCurrent++;
 	if (timeCurrent > level * TIME_TO_CHANGE_LEVEL)
 	{
@@ -105,8 +101,9 @@ void PlayScreen::update() {
 		timeA++;
 	}
 	else{
-
+		cout << "Hola" << endl;
 		Enemie* newEnemie = new Enemie(speedEnemieA, "A",150,150,20,0);
+		//newEnemie->setPosition(800, 100);
 		enemiesAVector.push_back(newEnemie);
 		timeA = 0;
 	}
@@ -122,14 +119,6 @@ void PlayScreen::update() {
 		enemiesBVector.push_back(newEnemie);
 		timeB = 0;
 	}
-
-	if (enemie->getPosition().x == -10 && enemie->getClean() == false)
-	{
-		std::cout << "Tienes que limpiar la basura :'v" << endl;
-		std::cout << "Puntaje: " << trahNoClean << endl;
-
-	}
-
 
 	//Update type A
 	for (size_t i = 0; i < enemiesAVector.size(); i++)
@@ -163,22 +152,8 @@ void PlayScreen::update() {
 		_currentState = ScreenState::CHANGE_NEXT;
 	}
 
-	//ALGO EXTRAÑO PASA AQUI PERO IGUAL FUNCIONA XDD
-	//std::cout <<"ship "<< ship->getPosition().x << " " << ship->getPosition().y << endl;
-	//std::cout <<"mouse "<< _game->_inputManager.getMouseCoords().x<<" "<< _game->_inputManager.getMouseCoords().y << endl;
 	ship->setPosition( _game->_inputManager.getMouseCoords().x - 25 , 475 - _game->_inputManager.getMouseCoords().y);
-	/*
-	for (size_t i = 0; i < enemiesVector.size(); i++)
-	{
-		if (enemiesVector[i]->getPosition().x<-200)
-		{
-			std::cout << "Eliminando " << i << endl;
-			std::cout << "Tamaño del vector Enemigo: " << enemiesVector.size() << endl;
-			delete enemiesVector[i];
-		}
-	}
-	*/
-	//std::cout << time<<endl;
+
 	checkInput();
 }
 
@@ -236,18 +211,6 @@ void PlayScreen::checkInput() {
 				isClicked = false;
 			}
 		}
-		//Clicked type tutorial xdd
-		if (!isClicked && enemie->cliked(_game->_inputManager.getMouseCoords())) {
-			audioPlayer->playSong(1);
-			//cout << "Apretado " << i << endl;
-			enemie->setEstado(1);
-			//if (enemie->getClean())
-			//{
-			//	audioPlayer->playSong(1);
-			//}
-			enemie->setClean(true);
-			isClicked = false;
-		}
 	}
 }
 
@@ -267,9 +230,7 @@ void PlayScreen::draw() {
 
 
 	backGround->draw(_spriteBatch, 800, 600, 0.0f, 0.0f);
-	//Draw tutorial 
-	enemie->draw(_spriteBatch);
-
+	
 	//Draw type B
 	for (size_t i = 0; i < enemiesBVector.size(); i++)
 	{
@@ -301,6 +262,12 @@ int PlayScreen::getPreviousScreen() const {
 	return SCREEN_INDEX_MENU;
 }
 
+int PlayScreen::getTutorialScreen() const
+{
+	return 0;
+}
+
 int PlayScreen::getNextScreen() const {
 	return SCREEN_INDEX_OVER;
+
 }

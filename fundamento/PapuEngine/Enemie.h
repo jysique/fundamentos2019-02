@@ -34,6 +34,10 @@ public:
 	void setClean(bool _clean) {
 		this->clean = _clean;
 	}
+	void setPosition(int _posX, int _posY) {
+		this->position.x = _posX;
+		this->position.y = _posY;
+	}
 
 	int getEstado() {
 		return this->estado;

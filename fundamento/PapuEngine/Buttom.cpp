@@ -22,10 +22,10 @@ void Buttom::setColor(ColorRGBA color)
 
 bool Buttom::cliked(glm::vec2 _position)
 {
-	return(position.x < _position.x) &&
-		(position.x + 190 > _position.x) &&
-		(position.y < _position.y + 150) &&
-		(position.y + 50 > _position.y + 150);
+	//std::cout << position.x << " " << _position.x <<" " << ((position.x < _position.x) && (position.x + 190 > _position.x)) << std::endl;
+	//return (position.x < _position.x) && (position.x + 190 > _position.x) && (position.y < _position.y + 150) && (position.y + 50 > _position.y + 150);
+	//std::cout << position.y << " " << _position.y << " " << (_position.y > 450 - position.y   && _position.y < 500 - position.y) << std::endl;
+	return (position.x < _position.x) && (position.x + 190 > _position.x) && (_position.y > 450 - position.y) && (_position.y < 500 - position.y);
 }
 
 void Buttom::setPosition(glm::vec2 _position)

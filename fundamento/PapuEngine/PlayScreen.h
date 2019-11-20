@@ -45,7 +45,6 @@ private:
 
 	Background* backGround = nullptr;
 	Ship* ship = nullptr;
-	Enemie* enemie = nullptr;
 	vector<Enemie*> enemiesAVector;
 	vector<Enemie*> enemiesBVector;
 	
@@ -83,6 +82,7 @@ public:
 	virtual void initSystem()override;
 	virtual int getNextScreen() const override;
 	virtual int getPreviousScreen() const override;
+	virtual int getTutorialScreen() const override;
 	virtual void checkInput() override;
 	~PlayScreen();
 };

@@ -109,6 +109,19 @@ void Game::update() {
 					_currentScreen->onEntry();
 				}
 				break;
+			case ScreenState::CHANGE_TUTORIAL:
+				_currentScreen->onExit();
+				_currentScreen = _screenList->getCurrent();
+				index = _currentScreen->getIndex();
+				_screenList->destroy();
+				addScreens();
+				setScreen(index);
+				_currentScreen = _screenList->moveTutorial();
+				if (_currentScreen) {
+					_currentScreen->setRunning();
+					_currentScreen->onEntry();
+				}
+				break;
 			case ScreenState::CHANGE_PREVIOUS:
 				_currentScreen->onExit();
 				_currentScreen = _screenList->getCurrent();

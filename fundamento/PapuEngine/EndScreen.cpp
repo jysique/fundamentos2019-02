@@ -130,6 +130,11 @@ int EndScreen::getPreviousScreen() const {
 	return SCREEN_INDEX_NO_SCREEN;
 }
 
+int EndScreen::getTutorialScreen() const
+{
+	return 0;
+}
+
 int EndScreen::getNextScreen() const {
 	return SCREEN_INDEX_GAME;
 }
